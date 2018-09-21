@@ -2,7 +2,7 @@ version: '2'
 services:
   app:
     # build: .
-    image: registry.cn-hangzhou.aliyuncs.com/sino_logs/sino_logs
+    image: registry.cn-hongkong.aliyuncs.com/my_web/kdxf
     volumes:
     - /home/Service
     ports:
