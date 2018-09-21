@@ -34,6 +34,7 @@ var Base64 = require('js-base64').Base64;
       }
     }
     function kdxf(text,reqOrigin,cb){
+      console.log(text,reqOrigin)
         /* 调科大讯飞的api */
         axios({
           method: 'post',
@@ -58,6 +59,7 @@ var Base64 = require('js-base64').Base64;
       const reqOrigin = req.headers.origin;
        const text=req.param('text') ;
        kdxf(text,reqOrigin,response=>{
+        console.log(response.headers['content-type'])
         if (response.headers['content-type'] === 'audio/mpeg') {
           return res.send({
             data:response.data,
