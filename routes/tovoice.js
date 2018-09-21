@@ -26,9 +26,9 @@ var Base64 = require('js-base64').Base64;
     }
     function IP (reqOrigin) {
       if(reqOrigin=="csp.sowl.cn"){
-        return "47.97.224.177"
+        return "47.52.151.165"
       }else if(reqOrigin=="csp.jfry.cn"){
-        // return "47.97.224.177"
+        return "47.52.151.165"
       }else {
         return  "223.68.83.113"
       }
