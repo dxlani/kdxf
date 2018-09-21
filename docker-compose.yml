@@ -3,8 +3,6 @@ services:
   app:
     # build: .
     image: registry.cn-hangzhou.aliyuncs.com/sino_logs/sino_logs
-    depends_on:
-    - mysql
     volumes:
     - /home/Service
     ports:
@@ -12,6 +10,4 @@ services:
     environment:
     - KEYMETRICS_PUBLIC=m5ds5q2bd7pxghe
     - KEYMETRICS_SECRET=qzi785bx94nsysk
-    links:
-    - mysql:mysqls
 

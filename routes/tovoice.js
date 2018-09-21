@@ -3,7 +3,6 @@ const router = express.Router();
 var axios = require('axios');
 var md5 = require('blueimp-md5');
 var Base64 = require('js-base64').Base64; 
-var reqOrigin = require('js-base64').reqOrigin;
    
     function curTime () {
       return Date.parse(Date()).toString().substr(0, 10)
@@ -25,7 +24,7 @@ var reqOrigin = require('js-base64').reqOrigin;
         const apiKey = '8d9400299d78c5ab793d26ac07643867'
         return md5(apiKey + curTime() + paramsBase64())
     }
-    function IP () {
+    function IP (reqOrigin) {
       if(reqOrigin=="csp.sowl.cn"){
         return "47.97.224.177"
       }else if(reqOrigin=="csp.jfry.cn"){
@@ -34,17 +33,17 @@ var reqOrigin = require('js-base64').reqOrigin;
         return  "223.68.83.113"
       }
     }
-    function kdxf(text,cb){
+    function kdxf(text,reqOrigin,cb){
         /* 调科大讯飞的api */
         axios({
           method: 'post',
-          url: 'http://api.xfyun.cn/v1/service/v1/tts',
+          url: 'https://api.xfyun.cn/v1/service/v1/tts',
           params: {
             text: text
           },
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
-            'X-Real-Ip': IP(),
+            'X-Real-Ip': IP(reqOrigin),
             'X-Appid': '5b29b152',
             'X-CurTime': curTime(),
             'X-Param': paramsBase64(),
@@ -56,9 +55,9 @@ var reqOrigin = require('js-base64').reqOrigin;
           });
     }
      router.get('/',function(req,res,next){
-        console.log(req.headers.origin)
+      const reqOrigin = req.headers.origin;
        const text=req.param('text') ;
-       kdxf(text,response=>{
+       kdxf(text,reqOrigin,response=>{
         if (response.headers['content-type'] === 'audio/mpeg') {
           return res.send({
             data:response.data,

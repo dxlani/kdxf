@@ -31,7 +31,7 @@ const ALLOW_ORIGIN = [ // 跨域白名单
  * 允许跨域
  */
 app.use((req, res, next) => {
-      const reqOrigin = req.headers.origin; // request响应头的origin属性
+      var reqOrigin = req.headers.origin; // request响应头的origin属性
         if(isOriginAllowed(reqOrigin, ALLOW_ORIGIN)) {
             res.header("Access-Control-Allow-Origin", reqOrigin);
             res.header('Access-Control-Allow-Credentials', 'true');
